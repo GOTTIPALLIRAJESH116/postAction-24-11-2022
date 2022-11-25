@@ -14,8 +14,8 @@ app.get("/",(req,res)=>{
 })
 app.post("/newData",(req,res)=>{
 	//console.log(req)
-	const {name,password}=req.body
-	console.log(name,password,"values")
+	const {name,password,course,gender}=req.body
+	console.log(name,password,course,gender,"values")
 	res.send("Data Added")
 })
 app.listen(port,()=>{

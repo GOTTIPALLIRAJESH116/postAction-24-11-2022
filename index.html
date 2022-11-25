@@ -38,6 +38,12 @@
 			font-family: 'Poppins',sans-serif;
 			font-size: 35px;
 		}
+		#save2{
+			padding: 1%;
+			border-radius: 8px;
+			background-color: green;
+			color: white;
+		}
 	</style>
 </head>
 <body>
@@ -45,27 +51,40 @@
 	<h1 class="reg">Registration Page</h1>
 	<p><input id="save" placeholder="enter text"></p>
 	<p><input id="save1" placeholder="password"></p>
+	<p><select id="save2">
+		<option>Select a Course</option>
+		<option value="MSCS">MSCS</option>
+		<option value="MPCS">MPCS</option>
+	</select></p>
+		<p><input id="male" type="radio" value="male" name="gender">male
+		<input id="female" type="radio" value="female" name="gender">female</p>
 	<button class="submit" onclick="submit()">submit</button>
 </div>
 	<script type="text/javascript">
 		function submit(){
 			var button=document.getElementById("save").value
 			var input=document.getElementById("save1").value
-		fetch("http://localhost:4222/newData",{
-			method:"POST",
-			headers:{
-				"Content-Type":"application/json"
-			},
-			body:JSON.stringify({name:button,password:input})
-		})
-		.then((res)=>{
-			console.log(res)
-			if(res.status===200)
-				alert("Data Added")
-		})
-		.catch((err)=>{
-			console.log("API created")
-		})
+			var select=document.getElementById("save2").value
+			var gmale=document.getElementById("male").checked
+			var gfemale=document.getElementById("female").checked
+			console.log(gmale,gfemale)
+			if(gmale==true) var gender="male"
+				else var gender="female"
+			fetch("http://localhost:4222/newData",{
+				method:"POST",
+				headers:{
+					"Content-Type":"application/json"
+				},
+				body:JSON.stringify({name:button,password:input,course:select,gender:gender})
+			})
+			.then((res)=>{
+				console.log(res)
+				if(res.status===200)
+					alert("Data Added")
+			})
+			.catch((err)=>{
+				console.log("API created")
+			})
 	}
 	</script>
 </body>
